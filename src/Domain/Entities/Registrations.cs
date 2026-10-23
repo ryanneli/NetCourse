@@ -15,7 +15,7 @@ namespace API.Domain.Entities
         public User User { get; set; }
         public Group Group { get; set; }
 
-
+        public ICollection<Score> Scores { get; set; }
 
     }
 }
