@@ -8,7 +8,7 @@ namespace API.Domain.Entities
     {
         public int Id { get; set; }
         public string Name { get; set; } = string.Empty;
-
+        public bool Excluido { get; set; }
         public byte[] PasswordHash { get; set; } = new byte[0];
         public byte[] PasswordSalt { get; set; } = new byte[0];
 

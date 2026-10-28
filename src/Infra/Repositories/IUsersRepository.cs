@@ -1,35 +1,56 @@
+using System.Security.Cryptography.X509Certificates;
 using API.Domain.Entities;
 using API.Domain.Interfaces;
+using API.Infra.Data.Context;
+using Microsoft.EntityFrameworkCore;
 
 namespace API.Infra.Repository
 {
-    public class UserRepository : IUser 
+    public class UserRepository : IUser
     {
-        public Task<User> GetByIdAsync(int id)
+        private readonly ApplicationDbContext _context;
+
+        public UserRepository(ApplicationDbContext context)
         {
-            throw new NotImplementedException();
+            _context = context;
+        }
+        public async Task<User> GetByIdAsync(int id)
+        {
+            // Passamos a condição diretamente para dentro do FirstOrDefaultAsync
+            return await _context.User.FirstOrDefaultAsync(x => x.Excluido == false && x.Id == id);
         }
 
-        public Task<User> AddAsync(User user)
+        public async Task<User> AddAsync(User user)
         {
-            throw new NotImplementedException();
+            await _context.User.AddAsync(user);
+            _context.SaveChangesAsync();
+            return user;
         }
 
-        public Task<User> UpdateAsync(User user)
+        public async Task<User> UpdateAsync(User user)
         {
-            throw new NotImplementedException();
+            _context.User.AddAsync(user);
+            await _context.SaveChangesAsync();
+            return user;
         }
 
-        public Task<User> DeleteAsync(int id)
+        public async Task<User> DeleteAsync(int id)
         {
-            throw new NotImplementedException();
+            var user = await _context.User.FirstOrDefaultAsync(x => x.Excluido == false && x.Id == id);
+            if (user == null)
+            {
+                return null;
+            }
+
+            user.Excluido = true;
+            _context.User.Update(user);
+            await _context.SaveChangesAsync();
+            return user;
         }
 
-        public Task<List<User>> GetAllAsync()
+        public async Task<List<User>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            return await _context.User.Where(x => x.Excluido == false).ToListAsync();
         }
-
-
     }
 }

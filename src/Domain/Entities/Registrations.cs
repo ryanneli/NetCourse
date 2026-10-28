@@ -10,6 +10,7 @@ namespace API.Domain.Entities
 
         public DateTime RegistrationDate { get; set; }
 
+        public bool Excluido { get; set; }
         public bool IsActive { get; set; }
 
         public User User { get; set; }

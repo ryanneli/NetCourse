@@ -10,6 +10,8 @@ namespace API.Domain.Entities
 
         public string Description { get; set; } = string.Empty;
         public int CourseId { get; set; }
+
+        public bool Excluido { get; set; }
         public ICollection<Registration> Registrations { get; set; }
         public Course Course { get; set; }
     }

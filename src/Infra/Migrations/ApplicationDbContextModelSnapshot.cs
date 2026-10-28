@@ -34,6 +34,9 @@ namespace Infra.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("Excluido")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(255)
@@ -59,6 +62,9 @@ namespace Infra.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("Excluido")
+                        .HasColumnType("bit");
+
                     b.Property<int>("GroupId")
                         .HasColumnType("int");
 
@@ -73,51 +79,6 @@ namespace Infra.Migrations
                     b.ToTable("Group");
                 });
 
-            modelBuilder.Entity("API.Domain.Entities.OrdemServico", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Cliente")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Os")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("OrdemServico");
-                });
-
-            modelBuilder.Entity("API.Domain.Entities.Pedido", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("DataCriação")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("OsId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("OsId");
-
-                    b.ToTable("Pedido");
-                });
-
             modelBuilder.Entity("API.Domain.Entities.Registration", b =>
                 {
                     b.Property<int>("Id")
@@ -125,6 +86,9 @@ namespace Infra.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<bool>("Excluido")
+                        .HasColumnType("bit");
 
                     b.Property<int>("GroupId")
                         .HasColumnType("int");
@@ -155,6 +119,9 @@ namespace Infra.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<bool>("Excluido")
+                        .HasColumnType("bit");
+
                     b.Property<bool>("IsAproved")
                         .HasColumnType("bit");
 
@@ -178,6 +145,9 @@ namespace Infra.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<bool>("Excluido")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -209,18 +179,6 @@ namespace Infra.Migrations
                         .IsRequired();
 
                     b.Navigation("Course");
-                });
-
-            modelBuilder.Entity("API.Domain.Entities.Pedido", b =>
-                {
-                    b.HasOne("API.Domain.Entities.OrdemServico", "OrdemServico")
-                        .WithMany("Pedidos")
-                        .HasForeignKey("OsId")
-                        .HasPrincipalKey("Os")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("OrdemServico");
                 });
 
             modelBuilder.Entity("API.Domain.Entities.Registration", b =>
@@ -261,11 +219,6 @@ namespace Infra.Migrations
             modelBuilder.Entity("API.Domain.Entities.Group", b =>
                 {
                     b.Navigation("Registrations");
-                });
-
-            modelBuilder.Entity("API.Domain.Entities.OrdemServico", b =>
-                {
-                    b.Navigation("Pedidos");
                 });
 
             modelBuilder.Entity("API.Domain.Entities.Registration", b =>

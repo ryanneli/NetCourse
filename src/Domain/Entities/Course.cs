@@ -7,6 +7,8 @@ namespace API.Domain.Entities
 
         public string Description { get; set; } = string.Empty;
 
+        public bool Excluido { get; set; }
+        
         public ICollection<Group> Group { get; set; }
 
     }

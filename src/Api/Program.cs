@@ -1,7 +1,6 @@
 using API.Infra.Ioc;
 using API.Infra.Data.Context;
 
-
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -18,7 +17,6 @@ if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
 }
-
 
 app.UseHttpsRedirection();
 app.UseAuthorization();

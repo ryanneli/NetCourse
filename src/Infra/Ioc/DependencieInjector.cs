@@ -26,12 +26,12 @@ namespace API.Infra.Ioc
                 options.UseSqlServer(connectionString, b => b.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName));
             });
 
-            services.AddScoped<CourseRepository, CourseRepository>();
-            services.AddScoped<GroupRepository, GroupRepository>();
-            services.AddScoped<RegistrationRepository, RegistrationRepository>();
-            services.AddScoped<ScoreRepository, ScoreRepository>();
-            services.AddScoped<UserRepository, UserRepository>();
-
+            services.AddScoped<ICourse, CourseRepository>();
+            services.AddScoped<IGroup, GroupRepository>();
+            services.AddScoped<IRegistration, RegistrationRepository>();
+            services.AddScoped<IScore, ScoreRepository>();
+            services.AddScoped<IUser, UserRepository>();
+            
             return services;
         }
 
