@@ -11,9 +11,7 @@ namespace API.Domain.Entities
         public bool Excluido { get; set; }
         public byte[] PasswordHash { get; set; } = new byte[0];
         public byte[] PasswordSalt { get; set; } = new byte[0];
-
         public string Profile { get; set; } = string.Empty;
-        
         public ICollection<Registration> Registrations { get; set; }
 
     }

@@ -8,7 +8,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
 using API.Domain.Interfaces;
 using API.Infra.Data.Context.EntitiesCOnfiguration;
-using API.Infra.Repository;
 using System.Collections.Generic;
 using System.Text;
 using System;
